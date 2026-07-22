@@ -1,0 +1,46 @@
+.app-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.app-header {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #edf4ff 0%, #f4f9ef 100%);
+  border: 1px solid #dce7dd;
+  margin-bottom: 1rem;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3f5860;
+  margin-bottom: 0.25rem;
+}
+
+.app-nav {
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-nav .nav-link {
+  color: #1f3340;
+  border: 1px solid #cfdae0;
+  background: #f8fbfd;
+}
+
+.app-nav .nav-link.active {
+  background: #1f6f8b;
+  border-color: #1f6f8b;
+}
+
+.app-content {
+  background: #ffffff;
+  border: 1px solid #dde5ea;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 12px 24px rgba(19, 46, 58, 0.08);
+}
