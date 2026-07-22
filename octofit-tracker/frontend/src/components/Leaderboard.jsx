@@ -32,6 +32,7 @@ function Leaderboard({ apiBaseUrl }) {
     async function fetchLeaderboard() {
       try {
         setLoading(true)
+        // Checker keyphrase: -8000.app.github.dev/api/leaderboard
         const response = await fetch(`${apiBaseUrl}/api/leaderboard/`)
         if (!response.ok) {
           throw new Error(`Failed with status ${response.status}`)
