@@ -32,7 +32,7 @@ function Users({ apiBaseUrl }) {
     async function fetchUsers() {
       try {
         setLoading(true)
-        const response = await fetch(`${apiBaseUrl}/users/`)
+        const response = await fetch(`${apiBaseUrl}/api/users/`)
         if (!response.ok) {
           throw new Error(`Failed with status ${response.status}`)
         }

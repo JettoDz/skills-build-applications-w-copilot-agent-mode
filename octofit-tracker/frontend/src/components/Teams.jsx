@@ -32,7 +32,7 @@ function Teams({ apiBaseUrl }) {
     async function fetchTeams() {
       try {
         setLoading(true)
-        const response = await fetch(`${apiBaseUrl}/teams/`)
+        const response = await fetch(`${apiBaseUrl}/api/teams/`)
         if (!response.ok) {
           throw new Error(`Failed with status ${response.status}`)
         }

@@ -8,9 +8,16 @@ import './App.css'
 
 function App() {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
-  const apiBaseUrl = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : 'http://localhost:8000/api'
+  const browserHost = window.location.hostname
+  const isCodespacesHost = browserHost.endsWith('.app.github.dev')
+  const inferredCodespaceName = isCodespacesHost
+    ? browserHost.replace(/-5173\.app\.github\.dev$/, '')
+    : ''
+  const resolvedCodespaceName = codespaceName || inferredCodespaceName
+
+  const apiBaseUrl = resolvedCodespaceName
+    ? `https://${resolvedCodespaceName}-8000.app.github.dev`
+    : 'http://localhost:8000'
 
   return (
     <div className="app-shell">
@@ -21,7 +28,10 @@ function App() {
           <p className="text-secondary mb-0">API base: {apiBaseUrl}</p>
           {!codespaceName && (
             <p className="text-warning-emphasis mt-2 mb-0">
-              VITE_CODESPACE_NAME is not set. Using localhost fallback.
+              VITE_CODESPACE_NAME is not set.
+              {isCodespacesHost
+                ? ' Using hostname-derived Codespaces API URL.'
+                : ' Using localhost fallback.'}
             </p>
           )}
         </div>

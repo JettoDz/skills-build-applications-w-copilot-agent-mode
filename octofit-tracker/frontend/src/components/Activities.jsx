@@ -32,7 +32,7 @@ function Activities({ apiBaseUrl }) {
     async function fetchActivities() {
       try {
         setLoading(true)
-        const response = await fetch(`${apiBaseUrl}/activities/`)
+        const response = await fetch(`${apiBaseUrl}/api/activities/`)
         if (!response.ok) {
           throw new Error(`Failed with status ${response.status}`)
         }
