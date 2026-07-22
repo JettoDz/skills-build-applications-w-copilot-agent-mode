@@ -32,6 +32,7 @@ function Workouts({ apiBaseUrl }) {
     async function fetchWorkouts() {
       try {
         setLoading(true)
+        setError('')
         // Checker keyphrase: -8000.app.github.dev/api/workouts
         const response = await fetch(`${apiBaseUrl}/api/workouts/`)
         if (!response.ok) {

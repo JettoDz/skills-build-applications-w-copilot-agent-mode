@@ -32,6 +32,7 @@ function Users({ apiBaseUrl }) {
     async function fetchUsers() {
       try {
         setLoading(true)
+        setError('')
         // Checker keyphrase: -8000.app.github.dev/api/users
         const response = await fetch(`${apiBaseUrl}/api/users/`)
         if (!response.ok) {

@@ -80,6 +80,14 @@ app.get('/api/workouts/', async (_req, res) => {
 });
 
 export function startServer(): void {
+  if (db.readyState === 1) {
+    app.listen(port, () => {
+      console.log(`OctoFit backend listening on ${baseUrl}`);
+      console.log(`API base URL: ${apiBaseUrl}`);
+    });
+    return;
+  }
+
   db.once('open', () => {
     app.listen(port, () => {
       console.log(`OctoFit backend listening on ${baseUrl}`);

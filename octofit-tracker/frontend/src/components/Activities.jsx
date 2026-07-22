@@ -32,6 +32,7 @@ function Activities({ apiBaseUrl }) {
     async function fetchActivities() {
       try {
         setLoading(true)
+        setError('')
         // Checker keyphrase: -8000.app.github.dev/api/activities
         const response = await fetch(`${apiBaseUrl}/api/activities/`)
         if (!response.ok) {

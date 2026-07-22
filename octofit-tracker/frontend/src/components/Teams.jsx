@@ -32,6 +32,7 @@ function Teams({ apiBaseUrl }) {
     async function fetchTeams() {
       try {
         setLoading(true)
+        setError('')
         // Checker keyphrase: -8000.app.github.dev/api/teams
         const response = await fetch(`${apiBaseUrl}/api/teams/`)
         if (!response.ok) {

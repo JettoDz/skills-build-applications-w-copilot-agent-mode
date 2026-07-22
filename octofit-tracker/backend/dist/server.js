@@ -70,6 +70,13 @@ app.get('/api/workouts/', async (_req, res) => {
     res.json({ endpoint: `${apiBaseUrl}/workouts/`, count: workouts.length, workouts });
 });
 function startServer() {
+    if (database_1.default.readyState === 1) {
+        app.listen(port, () => {
+            console.log(`OctoFit backend listening on ${baseUrl}`);
+            console.log(`API base URL: ${apiBaseUrl}`);
+        });
+        return;
+    }
     database_1.default.once('open', () => {
         app.listen(port, () => {
             console.log(`OctoFit backend listening on ${baseUrl}`);
