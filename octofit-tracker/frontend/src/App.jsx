@@ -11,7 +11,7 @@ function App() {
   const browserHost = window.location.hostname
   const isCodespacesHost = browserHost.endsWith('.app.github.dev')
   const inferredCodespaceName = isCodespacesHost
-    ? browserHost.replace(/-5173\.app\.github\.dev$/, '')
+    ? browserHost.replace(/-\d+\.app\.github\.dev$/, '')
     : ''
   const resolvedCodespaceName = codespaceName || inferredCodespaceName
 

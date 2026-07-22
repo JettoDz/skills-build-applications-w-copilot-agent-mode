@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startServer = startServer;
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const database_1 = __importDefault(require("./config/database"));
 const Activity_1 = __importDefault(require("./models/Activity"));
 const Leaderboard_1 = __importDefault(require("./models/Leaderboard"));
@@ -18,6 +19,29 @@ const baseUrl = codespaceName
     ? `https://${codespaceName}-8000.app.github.dev`
     : 'http://localhost:8000';
 const apiBaseUrl = `${baseUrl}/api`;
+const allowedOrigins = new Set([
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
+]);
+app.use((0, cors_1.default)({
+    origin: (origin, callback) => {
+        if (!origin) {
+            callback(null, true);
+            return;
+        }
+        if (allowedOrigins.has(origin)) {
+            callback(null, true);
+            return;
+        }
+        const isCodespacesOrigin = /^https:\/\/[a-z0-9-]+-\d+\.app\.github\.dev$/i.test(origin);
+        if (isCodespacesOrigin) {
+            callback(null, true);
+            return;
+        }
+        callback(new Error('Not allowed by CORS'));
+    },
+}));
 app.use(express_1.default.json());
 app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok', apiBaseUrl });

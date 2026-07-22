@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import db from './config/database';
 import Activity from './models/Activity';
 import Leaderboard from './models/Leaderboard';
@@ -13,6 +14,36 @@ const baseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
   : 'http://localhost:8000';
 const apiBaseUrl = `${baseUrl}/api`;
+
+const allowedOrigins = new Set([
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5175',
+]);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      const isCodespacesOrigin = /^https:\/\/[a-z0-9-]+-\d+\.app\.github\.dev$/i.test(origin);
+      if (isCodespacesOrigin) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error('Not allowed by CORS'));
+    },
+  })
+);
 
 app.use(express.json());
 
